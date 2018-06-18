@@ -21,6 +21,7 @@ import threads.AnimalThread;
 public class Gui extends JFrame {
     private JLabel[] labels;
     private JButton inicio;
+    private JButton reiniciar;
     private String[] nombres = {"canguro","tortuga","dragon"};
     
     public Gui(){
@@ -34,6 +35,7 @@ public void initialComponents(){
     
     labels = new JLabel[3];
     inicio = new JButton("Inicio");
+    reiniciar = new JButton("Reinicar");
     Container container = getContentPane();
     
     for(int i=0; i<3; i++){
@@ -44,6 +46,8 @@ public void initialComponents(){
     }
     inicio.setBounds(10,0,100,30);
     container.add(inicio);
+    reiniciar.setBounds(150,0,100,30);
+    container.add(reiniciar);
     
     inicio.addActionListener(new ActionListener(){
         @Override
@@ -56,16 +60,16 @@ public void initialComponents(){
             dragon.start();
         }      
     });
-    setSize(700,650);
-}
+    
+    reiniciar.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e) {
+           for(int i=0; i<3;i++)
+                labels[i].setLocation(0,(i*230)+10);
+        }
+    
+    });
+            setSize(700,650);
+   }
 
-
-    public static void main(String[] args){
-        java.awt.EventQueue.invokeLater(new Runnable(){
-            @Override
-            public void run() {
-                new Gui().setVisible(true);
-            }
-        });
-    }
 }
